@@ -16,5 +16,9 @@ export class NumberComponent {
         this.number = response;
     }
   })
-}
+  }
+  
+  ngOnDestroy() {
+    this.numberService.count$.unsubscribe();
+  }
 }
