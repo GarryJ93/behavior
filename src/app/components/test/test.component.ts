@@ -6,12 +6,12 @@ import { AddService } from 'src/app/services/add.service';
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css'],
 })
-export class TestComponent implements OnInit{
+export class TestComponent implements OnInit {
   count!: number;
-  constructor(private add: AddService) {}
+  constructor(private addService: AddService) {}
 
   ngOnInit() {
-    this.add.count$.subscribe({
+    this.addService.count$.subscribe({
       next: (response) => {
         this.count = response;
       },
@@ -19,15 +19,13 @@ export class TestComponent implements OnInit{
   }
 
   newCount() {
-    this.add.count$.next(1);
+    this.addService.count$.next(1);
   }
 
   addOne() {
-    this.count++;
-    console.log(this.count);
+    this.addService.count$.next(++this.count);
     if (this.count > 30) {
-      this.count = 0;
+      this.addService.count$.next(0);
     }
-    this.add.count$.next(this.count);
   }
 }
