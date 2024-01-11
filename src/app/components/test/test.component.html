@@ -1,5 +1,7 @@
 
-<div class="test"><button (click)="addOne()">ADD</button>
+<div class="test">
+    <button (click)="newCount()">New count</button>
+    <button *ngIf="count" (click)="addOne()">ADD</button>
 <div>
     <p>Nombre actuel : {{count}}</p>
 </div>

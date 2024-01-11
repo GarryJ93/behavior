@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AddService } from 'src/app/services/add.service';
 
 @Component({
@@ -8,10 +10,12 @@ import { AddService } from 'src/app/services/add.service';
 })
 export class NumberComponent {
   number!: number;
-  constructor(private numberService: AddService) { }
+  suscription!: Subscription;
+  constructor(private numberService: AddService,
+  private router: Router) { }
   
   ngOnInit() {
-    this.numberService.count$.subscribe({
+    this.suscription = this.numberService.count$.subscribe({
       next: (response) => {
         this.number = response;
     }
@@ -19,6 +23,7 @@ export class NumberComponent {
   }
   
   ngOnDestroy() {
-    this.numberService.count$.unsubscribe();
+    this.suscription.unsubscribe();
+    this.router.navigate(['home']);
   }
 }

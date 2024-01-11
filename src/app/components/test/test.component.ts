@@ -18,6 +18,10 @@ export class TestComponent implements OnInit{
     });
   }
 
+  newCount() {
+    this.add.count$.next(1);
+  }
+
   addOne() {
     this.count++;
     console.log(this.count);
